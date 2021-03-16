@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import {createContact} from '../../redux/contact/contact-actions';
 
 class ContactForm extends Component {
   state = {
@@ -13,7 +15,7 @@ class ContactForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.createContact(this.state);
+    this.props.onCreateContact(this.state);
     this.setState({ name: '', number: '' });
   };
 
@@ -45,4 +47,9 @@ class ContactForm extends Component {
   }
 }
 
-export default ContactForm;
+const mapDispatchToProps = dispatch => ({
+  onCreateContact: ({ name, number }) =>
+    dispatch(createContact({ name, number })),
+});
+
+export default connect(null, mapDispatchToProps)(ContactForm);

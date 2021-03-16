@@ -1,17 +1,26 @@
-import React from 'react'
+import React from 'react';
+import { connect } from 'react-redux';
+import { addFilterValue } from '../../redux/contact/contact-actions';
 
-const Filter = ({filter, handleInput}) => {
-    return (
-        <label>
-          Find contacts by name
-          <input
-            name="filter"
-            type="text"
-            onChange={handleInput}
-            value={filter}
-          />
-        </label>
-    )
-}
+const Filter = ({ filter, addFilterValue }) => {
+  const onHandleChange = (e) => {
+    addFilterValue(e.target.value)
+  }
 
-export default Filter
+  return (
+    <label>
+      Find contacts by name
+      <input name="filter" type="text" onChange={onHandleChange} value={filter} />
+    </label>
+  );
+};
+
+const mstp = state => ({
+  filter: state.contact.filter,
+});
+
+const mapDispatchToProps = dispatch => ({
+  addFilterValue: value => dispatch(addFilterValue(value)),
+});
+
+export default connect(mstp, mapDispatchToProps)(Filter);

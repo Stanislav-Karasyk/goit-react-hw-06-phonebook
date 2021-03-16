@@ -1,16 +1,19 @@
 import React from 'react'
+import { connect } from 'react-redux';
+import {delitContact} from '../../redux/contact/contact-actions'
 
-const ContactList = ({filterContacts, handleDeleteContact}) => {
+const ContactList = ({contacts, delitContact}) => {
+  
     return (
         <ul>
-          {filterContacts.map(({ name, id, number }) => (
+          {contacts.map(({ name, id, number }) => (
             <li key={id}>
               <p>
                 {name}: {number}
                 <button
                   id={id}
                   type="button"
-                  onClick={handleDeleteContact}
+                  onClick={()=>delitContact(id)}
                 >
                   Delete
                 </button>
@@ -21,4 +24,14 @@ const ContactList = ({filterContacts, handleDeleteContact}) => {
     )
 }
 
-export default ContactList
+const mapDispatchToProps = dispatch => ({
+  delitContact: (id) =>
+    dispatch(delitContact(id)),
+});
+
+const mstp = (state) => ({
+  contacts: state.contact.contacts.filter(contact =>
+        contact.name.toLowerCase().includes(state.contact.filter.toLowerCase()),
+      )
+ })
+export default connect(mstp, mapDispatchToProps)(ContactList)
