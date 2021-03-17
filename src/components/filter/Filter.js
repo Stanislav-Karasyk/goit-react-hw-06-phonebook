@@ -15,7 +15,7 @@ const Filter = ({ filter, addFilterValue }) => {
   );
 };
 
-const mstp = state => ({
+const mapStateToProps = state => ({
   filter: state.contact.filter,
 });
 
@@ -23,4 +23,4 @@ const mapDispatchToProps = dispatch => ({
   addFilterValue: value => dispatch(addFilterValue(value)),
 });
 
-export default connect(mstp, mapDispatchToProps)(Filter);
+export default connect(mapStateToProps, mapDispatchToProps)(Filter);

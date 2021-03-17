@@ -5,7 +5,6 @@ import ContactList from './contactList/ContactList';
 import Filter from './filter/Filter';
 
 const App = () => {
- 
   // componentDidMount() {
   //   const contacts = localStorage.getItem('contacts');
   //   const parsedContacts = JSON.parse(contacts);
@@ -58,18 +57,15 @@ const App = () => {
   //   }));
   // };
 
-  
-
-    return (
-      <>
-        <h1>Phonebook</h1>
-        <ContactForm />
-        <h2>Contacts</h2>
-        <Filter />
-        <ContactList/>
-      </>
-    );
-  }
-
+  return (
+    <>
+      <h1>Phonebook</h1>
+      <ContactForm />
+      <h2>Contacts</h2>
+      <Filter />
+      <ContactList />
+    </>
+  );
+};
 
 export default App;
